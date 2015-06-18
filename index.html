@@ -52,7 +52,7 @@ var add = function(a)
 		array[a] += 1;
 		console.log(array[a]);
 		console.log("ADDED " + a);
-		costs[a] += (modifier * Math.pow(array[a], 2));
+		costs[a] += (modifier * Math.pow(array[a] + 2, a + 2));
 		console.log("NOW = " + costs[a]);
 	}
 }
