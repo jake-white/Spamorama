@@ -1,0 +1,22 @@
+#header{
+	height: 100px;
+	text-align: center;
+}
+.column-left{
+	height:100%;
+	float: left;
+	width: 20%;
+	background-color:gray;
+}
+.column-right{
+	height:100%;
+	float: right;
+	width: 20%;
+	background-color:gray;
+}
+.column-center{
+	height:100%;
+	display: inline-block;
+	width: 60%;
+	background-color:#d3d3d3;
+}

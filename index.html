@@ -1,26 +1,49 @@
 <html>
-<input type = "image" src = "images/button.png" onclick = "send();">
+<title id = "title">Spamorama!</title>
+<div id = "header">
+Spamorama
+</div>
 <link rel="stylesheet" type="text/css" href="style.css">
+<div class = "column-left">
+<input type = "image" src = "images/button.png" onclick = "send();">
 <body onload = "start();">
-<p id = "sum"></p>
-Cash = $<label id = "cash"></label>
-<p>Spam/second x Gullibility = Cash/second</p>
-Cash/second = $<label id = "cps"></label>/second<br>
-Spam/second = <label id = "sps"></label> emails/second<br>
-Gullibility = <label id = "g"></label>%<br>
-<input type = "button" id = "b0" value = "Manual Labor: $10" onclick = "add(0);"><label id = "l0"></label><br>
-<input type = "button" id = "b1" value = "Script Kiddy: $25"onclick = "add(1);"><label id = "l1"></label><br>
+<table>
+	<tr><td>Cash = $<label id = "cash"></label></tr>
+	<tr><td>Spam/second x Gullibility = Cash/second</td></tr>		
+	<tr><td>Cash/second = $<label id = "cps"></label>/second</td></tr>
+	<tr><td>Spam/second = <label id = "sps"></label> emails/second</td></tr>
+	<tr><td>Gullibility = <label id = "g"></label>%</td></tr>
+</table>
+<br>
+<table>
+	<tr><td><input type = "button" id = "b0" value = "Manual Labor: $10" onclick = "add(0);"><label id = "l0"></label></td></tr>
+	<tr><td>Hire people to manually send out spam messages.</td></tr>
+	<tr><td>Spam/second per unit = <label id = "sps0"></label></td></tr>
+	<tr><td>Total spam/second of all units = <label id = "total0"></label></td></tr>
+	<tr><td><input type = "button" id = "b1" value = "Script Kiddy: $25"onclick = "add(1);"><label id = "l1"></label></td></tr>
+	<tr><td>Get some kids to write out scripts for spam bots.</td></tr>
+	<tr><td>Spam/second per unit = <label id = "sps1"></label></td></tr>
+	<tr><td>Total spam/second of all units = <label id = "total1"></label></td></tr>
+</table>
 </body>
+</div>
+<div class = "column-center">
+Center
+</div>
+<div class = "column-right">
+Right
+</div>
 <script>
 var cash = 0;
 var cps = 0, sps = 0, g = 0.5;
 var cpsText = document.getElementById('cps'), spsText = document.getElementById('sps'), gText = document.getElementById('g'), cashText = document.getElementById('cash');
 var tickTime = 10;
 var array = new Array(2); //empty array for numbers of objects
-var amounts = [1, 5, 10]; //CPS per object
+var amounts = [1, 5]; //CPS per object
 var costs = [10, 25]; //base cost per object
 var names = ["Manual Labor", "Script Kiddy"];
 var modifier = 0.5;
+var lastTime;
 var start = function()
 {
 	interval = setInterval(tick, tickTime); //creating a tick interval
@@ -28,6 +51,8 @@ var start = function()
 	{
 		array[i] = 0;
 	}
+	window.onfocus = Focus;
+	window.onblur = Blur;
 }
 var tick = function()
 {
@@ -71,11 +96,30 @@ var setTexts = function()
 	spsText.innerHTML = sps;
 	gText.innerHTML = g;
 	cashText.innerHTML = cash.toFixed(2);
+	if(cps > 0)
+	document.getElementById('title').innerHTML = cps + "$/second!";
 	for(var i = 0; i < array.length; ++i)
 	{
 		document.getElementById("l"+i).innerHTML = array[i];
 		document.getElementById("b"+i).value = names[i] + ": $" + costs[i].toFixed(2);
+		document.getElementById("sps"+i).innerHTML = amounts[i];
+		document.getElementById("total"+i).innerHTML = amounts[i] * array[i];
 	}
+}
+
+//detecting window activity
+var Focus = function()
+{
+	console.log("FOCUS");
+	var difference = new Date().getTime() - lastTime;
+	cash += cps * (difference/1000);
+	interval = setInterval(tick, 10);
+}
+var Blur = function()
+{
+	console.log("BLUR");
+	clearInterval(interval);
+	lastTime = new Date().getTime();
 }
 </script>
 </html>
