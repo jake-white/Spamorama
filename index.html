@@ -8,7 +8,7 @@ Spamorama
 <input type = "image" src = "images/button.png" onclick = "send();">
 <body onload = "start();">
 <table>
-	<tr><td>Cash = $<label id = "cash"></label></tr>
+	<tr><td>Cash = $<label id = "cash" ></label></tr>
 	<tr><td>Spam/second x Gullibility = Cash/second</td></tr>		
 	<tr><td>Cash/second = $<label id = "cps"></label>/second</td></tr>
 	<tr><td>Spam/second = <label id = "sps"></label> emails/second</td></tr>
@@ -28,10 +28,56 @@ Spamorama
 </body>
 </div>
 <div class = "column-center">
-Center
+Upgrades:<br>
+Cost: $<label id = "upgradecost">?</label><br>
+<label id = "description">[Upgrade Description Text]</label>
+<table class = "table1">
+	<tr>
+		<td onmouseover = "hover(0, true);" onmouseout = "hover(0, false)" >
+		<button id = "u0" class = "buttonunavailable" onclick = "buy(0)">Social Media Hack</button>
+		</td>
+		<td onmouseover = "hover(1, true);" onmouseout = "hover(1, false)">		
+		<button id = "u1" class = "buttonunavailable" onclick = "buy(1)">Penis Enlargement Pills</button>
+		</td>
+		<td onmouseover = "hover(2, true);" onmouseout = "hover(2, false)">		
+		<button id = "u2" class = "buttonunavailable" onclick = "buy(2)">Audience Targeting</button>
+		</td>
+		<td onmouseover = "hover(3, true);" onmouseout = "hover(3, false)">		
+		<button id = "u3" class = "buttonunavailable" onclick = "buy(3)">Upgrade</button>
+		</td>
+	</tr>
+	<tr>
+		<td onmouseover = "hover(4, true);" onmouseout = "hover(4, false)">
+		<button id = "u4" class = "buttonunavailable" onclick = "buy(4)">Upgrade</button>
+		</td>
+		<td onmouseover = "hover(5, true);" onmouseout = "hover(5, false)">		
+		<button id = "u5" class = "buttonunavailable" onclick = "buy(5)">Upgrade</button>
+		</td>
+		<td onmouseover = "hover(6, true);" onmouseout = "hover(6, false)">		
+		<button id = "u6" class = "buttonunavailable" onclick = "buy(6)">Upgrade</button>
+		</td>
+		<td onmouseover = "hover(7, true);" onmouseout = "hover(7, false)">		
+		<button id = "u7" class = "buttonunavailable" onclick = "buy(7)">Upgrade</button>
+		</td>
+	</tr>
+	<tr>
+		<td onmouseover = "hover(8, true);" onmouseout = "hover(8, false)">
+		<button id = "u8" class = "buttonunavailable" onclick = "buy(8)">Upgrade</button>
+		</td>
+		<td onmouseover = "hover(9, true);" onmouseout = "hover(9, false)">		
+		<button id = "u9" class = "buttonunavailable" onclick = "buy(9)">Upgrade</button>
+		</td>
+		<td onmouseover = "hover(10, true);" onmouseout = "hover(10, false)">		
+		<button id = "u10" class = "buttonunavailable" onclick = "buy(10)">Upgrade</button>
+		</td>
+		<td onmouseover = "hover(11, true);" onmouseout = "hover(11, false)">		
+		<button id = "u11" class = "buttonunavailable" onclick = "buy(11)">Upgrade</button>
+		</td>
+	</tr>
+</table>
 </div>
 <div class = "column-right">
-Right
+[Right Column]
 </div>
 <script>
 var cash = 0;
@@ -42,6 +88,13 @@ var array = new Array(2); //empty array for numbers of objects
 var amounts = [1, 5]; //CPS per object
 var costs = [10, 25]; //base cost per object
 var names = ["Manual Labor", "Script Kiddy"];
+var upgrades = new Array(12);
+var upgradecost = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+var description = [
+"You hack into Facenovel, a popular social media site, gaining access to personal information.  This doubles spam/second from Manual Labor.",
+"You start sending those kinds of emails.  This increases gullibility by 50%.",
+"You gain information on audiences, and are able to send more appropriate emails based on interests.  This increases gullibility by 50%."
+];
 var modifier = 0.5;
 var lastTime;
 var start = function()
@@ -50,6 +103,11 @@ var start = function()
 	for(var i = 0; i < array.length; ++i)
 	{
 		array[i] = 0;
+	}
+	for(var i = 0; i < upgrades.length; ++i)
+	{
+		upgrades[i] = new Upgrade(i, upgradecost[i]);
+		console.log("CREATED UPGRADE " + i);
 	}
 	window.onfocus = Focus;
 	window.onblur = Blur;
@@ -90,6 +148,23 @@ var calcSPS = function()
 	}
 	cps = sps*g;
 }
+var hover = function(buttonNumber, on)
+{
+	if(on)
+	{
+		document.getElementById('upgradecost').innerHTML = upgradecost[buttonNumber];
+		document.getElementById('description').innerHTML = description[buttonNumber];
+	}
+	if(!on)
+	{
+		document.getElementById('upgradecost').innerHTML = "?"
+		document.getElementById('description').innerHTML = "<br>";
+	}
+}
+var buy = function(buttonNumber)
+{
+	upgrades[buttonNumber].buy();
+}
 var setTexts = function()
 {	
 	cpsText.innerHTML = cps;
@@ -105,21 +180,72 @@ var setTexts = function()
 		document.getElementById("sps"+i).innerHTML = amounts[i];
 		document.getElementById("total"+i).innerHTML = amounts[i] * array[i];
 	}
+	for(var i = 0; i < upgrades.length; ++i)
+	{
+		var element = document.getElementById("u"+i);
+		if(upgrades[i].getBought())
+		{
+			element.disabled = true;
+			element.className = "buttonbought";
+		}
+		else if(upgrades[i].getAvailable())
+		{
+			element.disabled = false;
+			element.className = "buttonavailable";
+		}
+		else
+		{
+			element.disabled = true;
+			element.className = "buttonunavailable";
+		}
+	}
 }
 
 //detecting window activity
 var Focus = function()
 {
-	console.log("FOCUS");
 	var difference = new Date().getTime() - lastTime;
 	cash += cps * (difference/1000);
 	interval = setInterval(tick, 10);
 }
 var Blur = function()
 {
-	console.log("BLUR");
 	clearInterval(interval);
 	lastTime = new Date().getTime();
+}
+
+function Upgrade(upgradeNumber, cost)
+{
+	this.bought = false;
+	this.buy = function()
+	{
+		cash -= cost;
+		switch(upgradeNumber)
+		{
+			case 0:
+				amounts[0] *=2; //doubles manual labor amount
+				break;
+			case 1:
+				g *= 1.5;
+				break;
+			case 2:
+				g *= 1.5;
+				break;
+		}
+		this.bought = true;
+	}
+	this.getBought = function()
+	{
+		return this.bought;
+	}
+	this.getAvailable = function()
+	{
+		if(cash >= cost )
+		{
+			return true;
+		}
+		return false;
+	}
 }
 </script>
 </html>
