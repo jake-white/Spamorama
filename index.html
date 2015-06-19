@@ -33,45 +33,45 @@ Cost: $<label id = "upgradecost">?</label><br>
 <label id = "description">[Upgrade Description Text]</label>
 <table class = "table1">
 	<tr>
-		<td onmouseover = "hover(0, true);" onmouseout = "hover(0, false)" >
-		<button id = "u0" class = "buttonunavailable" onclick = "buy(0)">Social Media Hack</button>
+		<td>
+		<button id = "u0" class = "buttonunavailable" onmouseover = "hover(0, true);" onmouseout = "hover(0, false)" onclick = "buy(0)">Social Media Hack</button>
 		</td>
-		<td onmouseover = "hover(1, true);" onmouseout = "hover(1, false)">		
-		<button id = "u1" class = "buttonunavailable" onclick = "buy(1)">Penis Enlargement Pills</button>
+		<td>		
+		<button id = "u1" class = "buttonunavailable" onmouseover = "hover(1, true);" onmouseout = "hover(1, false)" onclick = "buy(1)">Penis Enlargement Pills</button>
 		</td>
-		<td onmouseover = "hover(2, true);" onmouseout = "hover(2, false)">		
-		<button id = "u2" class = "buttonunavailable" onclick = "buy(2)">Audience Targeting</button>
+		<td>		
+		<button id = "u2" class = "buttonunavailable" onmouseover = "hover(2, true);" onmouseout = "hover(2, false)" onclick = "buy(2)">Audience Targeting</button>
 		</td>
-		<td onmouseover = "hover(3, true);" onmouseout = "hover(3, false)">		
-		<button id = "u3" class = "buttonunavailable" onclick = "buy(3)">Upgrade</button>
-		</td>
-	</tr>
-	<tr>
-		<td onmouseover = "hover(4, true);" onmouseout = "hover(4, false)">
-		<button id = "u4" class = "buttonunavailable" onclick = "buy(4)">Upgrade</button>
-		</td>
-		<td onmouseover = "hover(5, true);" onmouseout = "hover(5, false)">		
-		<button id = "u5" class = "buttonunavailable" onclick = "buy(5)">Upgrade</button>
-		</td>
-		<td onmouseover = "hover(6, true);" onmouseout = "hover(6, false)">		
-		<button id = "u6" class = "buttonunavailable" onclick = "buy(6)">Upgrade</button>
-		</td>
-		<td onmouseover = "hover(7, true);" onmouseout = "hover(7, false)">		
-		<button id = "u7" class = "buttonunavailable" onclick = "buy(7)">Upgrade</button>
+		<td>		
+		<button id = "u3" class = "buttonunavailable" onmouseover = "hover(3, true);" onmouseout = "hover(3, false)" onclick = "buy(3)">Upgrade</button>
 		</td>
 	</tr>
 	<tr>
-		<td onmouseover = "hover(8, true);" onmouseout = "hover(8, false)">
-		<button id = "u8" class = "buttonunavailable" onclick = "buy(8)">Upgrade</button>
+		<td>
+		<button id = "u4" class = "buttonunavailable" onmouseover = "hover(4, true);" onmouseout = "hover(4, false)" onclick = "buy(4)">Upgrade</button>
 		</td>
-		<td onmouseover = "hover(9, true);" onmouseout = "hover(9, false)">		
-		<button id = "u9" class = "buttonunavailable" onclick = "buy(9)">Upgrade</button>
+		<td>		
+		<button id = "u5" class = "buttonunavailable" onmouseover = "hover(5, true);" onmouseout = "hover(5, false)" onclick = "buy(5)">Upgrade</button>
 		</td>
-		<td onmouseover = "hover(10, true);" onmouseout = "hover(10, false)">		
-		<button id = "u10" class = "buttonunavailable" onclick = "buy(10)">Upgrade</button>
+		<td>		
+		<button id = "u6" class = "buttonunavailable" onmouseover = "hover(6, true);" onmouseout = "hover(6, false)" onclick = "buy(6)">Upgrade</button>
 		</td>
-		<td onmouseover = "hover(11, true);" onmouseout = "hover(11, false)">		
-		<button id = "u11" class = "buttonunavailable" onclick = "buy(11)">Upgrade</button>
+		<td>		
+		<button id = "u7" class = "buttonunavailable" onmouseover = "hover(7, true);" onmouseout = "hover(7, false)" onclick = "buy(7)">Upgrade</button>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		<button id = "u8" class = "buttonunavailable" onmouseover = "hover(8, true);" onmouseout = "hover(8, false)" onclick = "buy(8)">Upgrade</button>
+		</td>
+		<td>		
+		<button id = "u9" class = "buttonunavailable" onmouseover = "hover(9, true);" onmouseout = "hover(9, false)" onclick = "buy(9)">Upgrade</button>
+		</td>
+		<td>		
+		<button id = "u10" class = "buttonunavailable" onmouseover = "hover(10, true);" onmouseout = "hover(10, false)" onclick = "buy(10)">Upgrade</button>
+		</td>
+		<td>		
+		<button id = "u11" class = "buttonunavailable" onmouseover = "hover(11, true);" onmouseout = "hover(11, false)" onclick = "buy(11)">Upgrade</button>
 		</td>
 	</tr>
 </table>
@@ -219,6 +219,7 @@ function Upgrade(upgradeNumber, cost)
 	this.bought = false;
 	this.buy = function()
 	{
+		hover(upgradeNumber, false);
 		cash -= cost;
 		switch(upgradeNumber)
 		{
