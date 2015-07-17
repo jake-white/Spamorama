@@ -16,28 +16,32 @@ Spamorama
 </table>
 <br>
 <table>
-	<tr><td><input type = "button" id = "b0" value = "Manual Labor: $10" onclick = "add(0);"><label id = "l0"></label></td></tr>
+	<tr><td><input type = "button" id = "b0" onclick = "add(0);"><label id = "l0"></label></td></tr>
 	<tr><td>Hire people to manually send out spam messages.</td></tr>
 	<tr><td>Spam/second per unit = <label id = "sps0"></label></td></tr>
 	<tr><td>Total spam/second of all units = <label id = "total0"></label></td></tr>
-	<tr><td><input type = "button" id = "b1" value = "Script Kiddy: $25"onclick = "add(1);"><label id = "l1"></label></td></tr>
+	<tr><td><input type = "button" id = "b1" onclick = "add(1);"><label id = "l1"></label></td></tr>
 	<tr><td>Get some kids to write out scripts for spam bots.</td></tr>
 	<tr><td>Spam/second per unit = <label id = "sps1"></label></td></tr>
 	<tr><td>Total spam/second of all units = <label id = "total1"></label></td></tr>
+	<tr><td><input type = "button" id = "b2" onclick = "add(2);"><label id = "l2"></label></td></tr>
+	<tr><td>Employ the general public--create chain emails!</td></tr>
+	<tr><td>Spam/second per unit = <label id = "sps2"></label></td></tr>
+	<tr><td>Total spam/second of all units = <label id = "total2"></label></td></tr>
 </table>
 </body>
 </div>
 <div class = "column-center">
 Upgrades:<br>
 Cost: $<label id = "upgradecost">?</label><br>
-<label id = "description">[Upgrade Description Text]</label>
+<label id = "description">Hover over an available upgrade to read the description!</label>
 <table class = "table1">
 	<tr>
 		<td>
 		<button id = "u0" class = "buttonunavailable" onmouseover = "hover(0, true);" onmouseout = "hover(0, false)" onclick = "buy(0)">Social Media Hack</button>
 		</td>
 		<td>		
-		<button id = "u1" class = "buttonunavailable" onmouseover = "hover(1, true);" onmouseout = "hover(1, false)" onclick = "buy(1)">Penis Enlargement Pills</button>
+		<button id = "u1" class = "buttonunavailable" onmouseover = "hover(1, true);" onmouseout = "hover(1, false)" onclick = "buy(1)">Enlargement Pills</button>
 		</td>
 		<td>		
 		<button id = "u2" class = "buttonunavailable" onmouseover = "hover(2, true);" onmouseout = "hover(2, false)" onclick = "buy(2)">Audience Targeting</button>
@@ -81,21 +85,21 @@ Cost: $<label id = "upgradecost">?</label><br>
 </div>
 <script>
 var cash = 0;
-var cps = 0, sps = 0, g = 0.5;
+var cps = 0, sps = 0, g = 0.5; //cash/sec, spam/sec, gullibility
 var cpsText = document.getElementById('cps'), spsText = document.getElementById('sps'), gText = document.getElementById('g'), cashText = document.getElementById('cash');
 var tickTime = 10;
-var array = new Array(2); //empty array for numbers of objects
-var amounts = [1, 5]; //CPS per object
-var costs = [10, 25]; //base cost per object
-var names = ["Manual Labor", "Script Kiddy"];
-var upgrades = new Array(12);
-var upgradecost = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+var array = new Array(3); //empty array for numbers of objects
+var amounts = [1, 5, 10]; //CPS per object
+var costs = [10, 25, 50]; //base cost per object
+var names = ["Manual Labor", "Script Kiddy", "Chain Email"]; //names of units
+var upgrades = new Array(12); //array of Upgrade Objects
+var upgradecost = [1, 1, 1]; //array of upgrade costs
 var description = [
 "You hack into Facenovel, a popular social media site, gaining access to personal information.  This doubles spam/second from Manual Labor.",
 "You start sending those kinds of emails.  This increases gullibility by 50%.",
 "You gain information on audiences, and are able to send more appropriate emails based on interests.  This increases gullibility by 50%."
-];
-var modifier = 0.5;
+]; //array of upgrade descriptions
+var modifier = 0.5; //modifier to exponentially change the cost.  NewCost = [(Amount+2)^(UnitID+2)]*modifier
 var lastTime;
 var start = function()
 {
@@ -135,7 +139,7 @@ var add = function(a)
 		array[a] += 1;
 		console.log(array[a]);
 		console.log("ADDED " + a);
-		costs[a] += (modifier * Math.pow(array[a] + 2, a + 2));
+		costs[a] += (modifier * Math.pow(array[a] + 2, a + 2)); //calculate new cost after buying the unit
 		console.log("NOW = " + costs[a]);
 	}
 }
@@ -158,7 +162,7 @@ var hover = function(buttonNumber, on)
 	if(!on)
 	{
 		document.getElementById('upgradecost').innerHTML = "?"
-		document.getElementById('description').innerHTML = "<br>";
+		document.getElementById('description').innerHTML = "Hover over an available upgrade to read the description!";
 	}
 }
 var buy = function(buttonNumber)
@@ -214,23 +218,23 @@ var Blur = function()
 	lastTime = new Date().getTime();
 }
 
-function Upgrade(upgradeNumber, cost)
+function Upgrade(upgradeNumber, cost) //upgrades go case-by-case to change amounts and modifiers
 {
 	this.bought = false;
 	this.buy = function()
 	{
 		hover(upgradeNumber, false);
 		cash -= cost;
-		switch(upgradeNumber)
+		switch(upgradeNumber) //each upgrade uses switch-case for its effects
 		{
 			case 0:
 				amounts[0] *=2; //doubles manual labor amount
 				break;
 			case 1:
-				g *= 1.5;
+				g *= 1.5; //increases gullibility by 50%
 				break;
 			case 2:
-				g *= 1.5;
+				g *= 1.5; //increases gullibility by 50%
 				break;
 		}
 		this.bought = true;
