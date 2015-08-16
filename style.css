@@ -2,18 +2,22 @@
 	height: 50px;
 	text-align: center;
 }
-.container { 
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-around;
+.container {
+	display:flex;
+
+    /* Centering the page */
+    max-width:1200px;
+    margin:0 auto;
 }
 .column-left{
+	flex-shrink:0;
+    width:280px;
 	height: 100%;
 	background-color:gray;
 	line-height: 22px;
 }
 .column-center{
+	flex-grow: 1;
 	height: 100%;
 	background-color:#d3d3d3;
 }
@@ -21,15 +25,18 @@
 	height: 100%;
 	background-color:gray;
 }
-@media all and (min-width: 600px) {
-  .aside { flex: 1 auto; }
-}
+@media all and (max-width: 800px) {
 
-@media all and (min-width: 800px) {
-  .column-center    { flex: 3 0px; }
-  .column-left { order: 1; } 
-  .column-center    { order: 2; }
-  .column-right { order: 3; }
+    #page {
+        flex-flow:column;
+    }
+
+    /* Make the sidebar take the entire width of the screen */
+
+    aside {
+        width:auto;
+    }
+
 }
 table.table1 {
 	margin: 0px;
