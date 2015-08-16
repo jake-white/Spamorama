@@ -3,6 +3,8 @@
 <div id = "header">
 Spamorama
 </div>
+<script type="text/javascript" src="unit.js"></script>
+<script type="text/javascript" src="upgrade.js"></script>
 <link rel="stylesheet" type="text/css" href="style.css">
 <div class = "column-left">
 <input type = "image" src = "images/button.png" onclick = "send();">
@@ -89,16 +91,7 @@ var cps = 0, sps = 0, g = 0.5; //cash/sec, spam/sec, gullibility
 var cpsText = document.getElementById('cps'), spsText = document.getElementById('sps'), gText = document.getElementById('g'), cashText = document.getElementById('cash');
 var tickTime = 10;
 var array = new Array(3); //empty array for numbers of objects
-var amounts = [1, 5, 10]; //CPS per object
-var costs = [10, 25, 50]; //base cost per object
-var names = ["Manual Labor", "Script Kiddy", "Chain Email"]; //names of units
 var upgrades = new Array(12); //array of Upgrade Objects
-var upgradecost = [1, 1, 1]; //array of upgrade costs
-var description = [
-"You hack into Facenovel, a popular social media site, gaining access to personal information.  This doubles spam/second from Manual Labor.",
-"You start sending those kinds of emails.  This increases gullibility by 50%.",
-"You gain information on audiences, and are able to send more appropriate emails based on interests.  This increases gullibility by 50%."
-]; //array of upgrade descriptions
 var modifier = 0.5; //modifier to exponentially change the cost.  NewCost = [(Amount+2)^(UnitID+2)]*modifier
 var lastTime;
 var start = function()
@@ -110,7 +103,7 @@ var start = function()
 	}
 	for(var i = 0; i < upgrades.length; ++i)
 	{
-		upgrades[i] = new Upgrade(i, upgradecost[i]);
+		upgrades[i] = new Upgrade(i, upgrade.cost[i]);
 		console.log("CREATED UPGRADE " + i);
 	}
 	window.onfocus = Focus;
@@ -133,14 +126,14 @@ var send = function()
 }
 var add = function(a)
 {	
-	if(cash >= costs[a]) //checking for enough cash
+	if(cash >= unit.cost[a]) //checking for enough cash
 	{
-		cash-= costs[a];
+		cash-= unit.cost[a];
 		array[a] += 1;
 		console.log(array[a]);
 		console.log("ADDED " + a);
-		costs[a] += (modifier * Math.pow(array[a] + 2, a + 2)); //calculate new cost after buying the unit
-		console.log("NOW = " + costs[a]);
+		unit.cost[a] += (modifier * Math.pow(array[a] + 2, a + 2)); //calculate new cost after buying the unit
+		console.log("NOW = " + unit.cost[a]);
 	}
 }
 var calcSPS = function()
@@ -148,7 +141,7 @@ var calcSPS = function()
 	sps = 0;
 	for(var i = 0; i < array.length; ++i)
 	{
-		sps += array[i]*amounts[i];
+		sps += array[i]*unit.output[i];
 	}
 	cps = sps*g;
 }
@@ -156,8 +149,8 @@ var hover = function(buttonNumber, on)
 {
 	if(on)
 	{
-		document.getElementById('upgradecost').innerHTML = upgradecost[buttonNumber];
-		document.getElementById('description').innerHTML = description[buttonNumber];
+		document.getElementById('upgradecost').innerHTML = upgrade.cost[buttonNumber];
+		document.getElementById('description').innerHTML = upgrade.description[buttonNumber];
 	}
 	if(!on)
 	{
@@ -180,9 +173,9 @@ var setTexts = function()
 	for(var i = 0; i < array.length; ++i)
 	{
 		document.getElementById("l"+i).innerHTML = array[i];
-		document.getElementById("b"+i).value = names[i] + ": $" + costs[i].toFixed(2);
-		document.getElementById("sps"+i).innerHTML = amounts[i];
-		document.getElementById("total"+i).innerHTML = amounts[i] * array[i];
+		document.getElementById("b"+i).value = unit.name[i] + ": $" + unit.cost[i].toFixed(2);
+		document.getElementById("sps"+i).innerHTML = unit.output[i];
+		document.getElementById("total"+i).innerHTML = unit.output[i] * array[i];
 	}
 	for(var i = 0; i < upgrades.length; ++i)
 	{
@@ -228,7 +221,7 @@ function Upgrade(upgradeNumber, cost) //upgrades go case-by-case to change amoun
 		switch(upgradeNumber) //each upgrade uses switch-case for its effects
 		{
 			case 0:
-				amounts[0] *=2; //doubles manual labor amount
+				unit.output[0] *=2; //doubles manual labor amount
 				break;
 			case 1:
 				g *= 1.5; //increases gullibility by 50%
