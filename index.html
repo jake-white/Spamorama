@@ -7,30 +7,14 @@ Spamorama
 <script type="text/javascript" src="upgrade.js"></script>
 <link rel="stylesheet" type="text/css" href="style.css">
 <div class = "column-left">
-<input type = "image" src = "images/button.png" onclick = "send();">
+<input type = "image" src = "images/button.png" onclick = "send();"><br>
 <body onload = "start();">
-<table>
-	<tr><td>Cash = $<label id = "cash" ></label></tr>
-	<tr><td>Spam/second x Gullibility = Cash/second</td></tr>		
-	<tr><td>Cash/second = $<label id = "cps"></label>/second</td></tr>
-	<tr><td>Spam/second = <label id = "sps"></label> emails/second</td></tr>
-	<tr><td>Gullibility = <label id = "g"></label>%</td></tr>
-</table>
-<br>
-<table>
-	<tr><td><input type = "button" id = "b0" onclick = "add(0);"><label id = "l0"></label></td></tr>
-	<tr><td>Hire people to manually send out spam messages.</td></tr>
-	<tr><td>Spam/second per unit = <label id = "sps0"></label></td></tr>
-	<tr><td>Total spam/second of all units = <label id = "total0"></label></td></tr>
-	<tr><td><input type = "button" id = "b1" onclick = "add(1);"><label id = "l1"></label></td></tr>
-	<tr><td>Get some kids to write out scripts for spam bots.</td></tr>
-	<tr><td>Spam/second per unit = <label id = "sps1"></label></td></tr>
-	<tr><td>Total spam/second of all units = <label id = "total1"></label></td></tr>
-	<tr><td><input type = "button" id = "b2" onclick = "add(2);"><label id = "l2"></label></td></tr>
-	<tr><td>Employ the general public--create chain emails!</td></tr>
-	<tr><td>Spam/second per unit = <label id = "sps2"></label></td></tr>
-	<tr><td>Total spam/second of all units = <label id = "total2"></label></td></tr>
-</table>
+Cash = $<label id = "cash" ></label><br>
+Spam/second x Gullibility = Cash/second<br>
+Cash/second = $<label id = "cps"></label>/second<br>
+Spam/second = <label id = "sps"></label> emails/second<br>
+Gullibility = <label id = "g"></label>%<br>
+<div id = "unitDiv"></div>
 </body>
 </div>
 <div class = "column-center">
@@ -40,44 +24,44 @@ Cost: $<label id = "upgradecost">?</label><br>
 <table class = "table1">
 	<tr>
 		<td>
-		<button id = "u0" class = "buttonunavailable" onmouseover = "hover(0, true);" onmouseout = "hover(0, false)" onclick = "buy(0)">Social Media Hack</button>
+		<button id = "u0" class = "buttonunavailable" onmouseover = "hover(0, true);" onmouseout = "hover(0, false)" onclick = "buy(0)"></button>
 		</td>
 		<td>		
-		<button id = "u1" class = "buttonunavailable" onmouseover = "hover(1, true);" onmouseout = "hover(1, false)" onclick = "buy(1)">Enlargement Pills</button>
+		<button id = "u1" class = "buttonunavailable" onmouseover = "hover(1, true);" onmouseout = "hover(1, false)" onclick = "buy(1)"></button>
 		</td>
 		<td>		
-		<button id = "u2" class = "buttonunavailable" onmouseover = "hover(2, true);" onmouseout = "hover(2, false)" onclick = "buy(2)">Audience Targeting</button>
+		<button id = "u2" class = "buttonunavailable" onmouseover = "hover(2, true);" onmouseout = "hover(2, false)" onclick = "buy(2)"></button>
 		</td>
 		<td>		
-		<button id = "u3" class = "buttonunavailable" onmouseover = "hover(3, true);" onmouseout = "hover(3, false)" onclick = "buy(3)">Upgrade</button>
+		<button id = "u3" class = "buttonunavailable" onmouseover = "hover(3, true);" onmouseout = "hover(3, false)" onclick = "buy(3)"></button>
 		</td>
 	</tr>
 	<tr>
 		<td>
-		<button id = "u4" class = "buttonunavailable" onmouseover = "hover(4, true);" onmouseout = "hover(4, false)" onclick = "buy(4)">Upgrade</button>
+		<button id = "u4" class = "buttonunavailable" onmouseover = "hover(4, true);" onmouseout = "hover(4, false)" onclick = "buy(4)"></button>
 		</td>
 		<td>		
-		<button id = "u5" class = "buttonunavailable" onmouseover = "hover(5, true);" onmouseout = "hover(5, false)" onclick = "buy(5)">Upgrade</button>
+		<button id = "u5" class = "buttonunavailable" onmouseover = "hover(5, true);" onmouseout = "hover(5, false)" onclick = "buy(5)"></button>
 		</td>
 		<td>		
-		<button id = "u6" class = "buttonunavailable" onmouseover = "hover(6, true);" onmouseout = "hover(6, false)" onclick = "buy(6)">Upgrade</button>
+		<button id = "u6" class = "buttonunavailable" onmouseover = "hover(6, true);" onmouseout = "hover(6, false)" onclick = "buy(6)"></button>
 		</td>
 		<td>		
-		<button id = "u7" class = "buttonunavailable" onmouseover = "hover(7, true);" onmouseout = "hover(7, false)" onclick = "buy(7)">Upgrade</button>
+		<button id = "u7" class = "buttonunavailable" onmouseover = "hover(7, true);" onmouseout = "hover(7, false)" onclick = "buy(7)"></button>
 		</td>
 	</tr>
 	<tr>
 		<td>
-		<button id = "u8" class = "buttonunavailable" onmouseover = "hover(8, true);" onmouseout = "hover(8, false)" onclick = "buy(8)">Upgrade</button>
+		<button id = "u8" class = "buttonunavailable" onmouseover = "hover(8, true);" onmouseout = "hover(8, false)" onclick = "buy(8)"></button>
 		</td>
 		<td>		
-		<button id = "u9" class = "buttonunavailable" onmouseover = "hover(9, true);" onmouseout = "hover(9, false)" onclick = "buy(9)">Upgrade</button>
+		<button id = "u9" class = "buttonunavailable" onmouseover = "hover(9, true);" onmouseout = "hover(9, false)" onclick = "buy(9)"></button>
 		</td>
 		<td>		
-		<button id = "u10" class = "buttonunavailable" onmouseover = "hover(10, true);" onmouseout = "hover(10, false)" onclick = "buy(10)">Upgrade</button>
+		<button id = "u10" class = "buttonunavailable" onmouseover = "hover(10, true);" onmouseout = "hover(10, false)" onclick = "buy(10)"></button>
 		</td>
 		<td>		
-		<button id = "u11" class = "buttonunavailable" onmouseover = "hover(11, true);" onmouseout = "hover(11, false)" onclick = "buy(11)">Upgrade</button>
+		<button id = "u11" class = "buttonunavailable" onmouseover = "hover(11, true);" onmouseout = "hover(11, false)" onclick = "buy(11)"></button>
 		</td>
 	</tr>
 </table>
@@ -90,12 +74,15 @@ var cash = 0;
 var cps = 0, sps = 0, g = 0.5; //cash/sec, spam/sec, gullibility
 var cpsText = document.getElementById('cps'), spsText = document.getElementById('sps'), gText = document.getElementById('g'), cashText = document.getElementById('cash');
 var tickTime = 10;
-var array = new Array(3); //empty array for numbers of objects
+var array;; //empty array for numbers of objects
 var upgrades = new Array(12); //array of Upgrade Objects
 var modifier = 0.5; //modifier to exponentially change the cost.  NewCost = [(Amount+2)^(UnitID+2)]*modifier
-var lastTime;
+var lastTime
+var button, totalElem;
 var start = function()
 {
+	declareArrays();
+	createDynamicElements();
 	interval = setInterval(tick, tickTime); //creating a tick interval
 	for(var i = 0; i < array.length; ++i)
 	{
@@ -108,6 +95,36 @@ var start = function()
 	}
 	window.onfocus = Focus;
 	window.onblur = Blur;
+}
+var createDynamicElements = function() //creating dynamic buttons and text nodes based off of "unit.js"
+{	
+	var unitDiv = document.getElementById('unitDiv');
+	for(var i = 0; i < unit.name.length; ++i)
+	{
+		button[i] = document.createElement("button");
+		buttonText = document.createTextNode(array[i] + " " + unit.name[i] + ": $" + unit.cost[i].toFixed(2));
+		button[i].appendChild(buttonText);
+		button[i].setAttribute('onclick', 'add('+i+')');
+		unitDiv.appendChild(button[i]);
+		unitDiv.appendChild(document.createElement('br'));
+		unitDiv.appendChild(document.createTextNode(unit.description[i]));
+		unitDiv.appendChild(document.createElement('br'));
+		unitDiv.appendChild(document.createTextNode("Spam/second per unit = " + unit.output[i]));
+		unitDiv.appendChild(document.createElement('br'));
+		totalElem[i] = document.createTextNode("Total spam/second of all units = " + unit.output[i] * array[i]);
+		unitDiv.appendChild(totalElem[i]);
+	}
+	for(var i = 0; i < upgrade.name.length; ++i)
+	{
+		document.getElementById('u'+i).innerHTML = upgrade.name[i];
+	}
+}
+var declareArrays = function()
+{
+	array = new Array(unit.name.length);
+	button = new Array(unit.name.length);
+	totalElem = new Array(unit.name.length);
+	upgrades = new Array(upgrade.cost.length);
 }
 var tick = function()
 {
@@ -170,14 +187,12 @@ var setTexts = function()
 	cashText.innerHTML = cash.toFixed(2);
 	if(cps > 0)
 	document.getElementById('title').innerHTML = "$" + cps + "/second!";
-	for(var i = 0; i < array.length; ++i)
+	for(var i = 0; i < array.length; ++i) //changing unit buttons/text nodes
 	{
-		document.getElementById("l"+i).innerHTML = array[i];
-		document.getElementById("b"+i).value = unit.name[i] + ": $" + unit.cost[i].toFixed(2);
-		document.getElementById("sps"+i).innerHTML = unit.output[i];
-		document.getElementById("total"+i).innerHTML = unit.output[i] * array[i];
+		button[i].innerHTML = array[i] + " " + unit.name[i] + ": $" + unit.cost[i].toFixed(2);
+		totalElem[i].nodeValue = "Total spam/second of all units = " + unit.output[i] * array[i]; //text nodes require nodeValue, apparently
 	}
-	for(var i = 0; i < upgrades.length; ++i)
+	for(var i = 0; i < upgrade.cost[i]; ++i)
 	{
 		var element = document.getElementById("u"+i);
 		if(upgrades[i].getBought())
@@ -228,6 +243,9 @@ function Upgrade(upgradeNumber, cost) //upgrades go case-by-case to change amoun
 				break;
 			case 2:
 				g *= 1.5; //increases gullibility by 50%
+				break;
+			case 3:
+				unit.output[4]*=2;
 				break;
 		}
 		this.bought = true;

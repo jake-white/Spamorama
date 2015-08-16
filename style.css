@@ -7,6 +7,8 @@
 	float: left;
 	width: 20%;
 	background-color:gray;
+	line-height: 22px;
+	padding: 3px;
 }
 .column-right{
 	height:100%;
@@ -22,10 +24,10 @@
 }
 table.table1 {
 	margin: 0px;
-	width: 50%;
 	height: 50%;
 }
 table.table1 td {
+	width: 15%;
 	border: 1px solid black;
 }
 table.table1 button {
