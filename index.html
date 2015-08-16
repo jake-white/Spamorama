@@ -6,6 +6,7 @@ Spamorama
 <script type="text/javascript" src="unit.js"></script>
 <script type="text/javascript" src="upgrade.js"></script>
 <link rel="stylesheet" type="text/css" href="style.css">
+<div class = container>
 <div class = "column-left">
 <input type = "image" src = "images/button.png" onclick = "send();"><br>
 <body onload = "start();">
@@ -66,6 +67,7 @@ Cost: $<label id = "upgradecost">?</label><br>
 	</tr>
 </table>
 </div>
+</div>
 <div class = "column-right">
 [Right Column]
 </div>
@@ -91,7 +93,6 @@ var start = function()
 	for(var i = 0; i < upgrades.length; ++i)
 	{
 		upgrades[i] = new Upgrade(i, upgrade.cost[i]);
-		console.log("CREATED UPGRADE " + i);
 	}
 	window.onfocus = Focus;
 	window.onblur = Blur;
@@ -113,6 +114,7 @@ var createDynamicElements = function() //creating dynamic buttons and text nodes
 		unitDiv.appendChild(document.createElement('br'));
 		totalElem[i] = document.createTextNode("Total spam/second of all units = " + unit.output[i] * array[i]);
 		unitDiv.appendChild(totalElem[i]);
+		unitDiv.appendChild(document.createElement('br'));
 	}
 	for(var i = 0; i < upgrade.name.length; ++i)
 	{
@@ -147,10 +149,7 @@ var add = function(a)
 	{
 		cash-= unit.cost[a];
 		array[a] += 1;
-		console.log(array[a]);
-		console.log("ADDED " + a);
 		unit.cost[a] += (modifier * Math.pow(array[a] + 2, a + 2)); //calculate new cost after buying the unit
-		console.log("NOW = " + unit.cost[a]);
 	}
 }
 var calcSPS = function()
@@ -183,7 +182,7 @@ var setTexts = function()
 {	
 	cpsText.innerHTML = cps;
 	spsText.innerHTML = sps;
-	gText.innerHTML = g;
+	gText.innerHTML = g * 100;
 	cashText.innerHTML = cash.toFixed(2);
 	if(cps > 0)
 	document.getElementById('title').innerHTML = "$" + cps + "/second!";
