@@ -1,23 +1,23 @@
 <html>
 <title id = "title">Spamorama!</title>
-<div id = "header">
-Spamorama
-</div>
+
 <script type="text/javascript" src="unit.js"></script>
 <script type="text/javascript" src="upgrade.js"></script>
 <link rel="stylesheet" type="text/css" href="style.css">
-<div class = container>
+
+<body onload = "start();">
+<div class = "header">Spamorama!</div>
+<div class = "columns">
 <div class = "column-left">
 <input type = "image" src = "images/button.png" onclick = "send();"><br>
-<body onload = "start();">
 Cash = $<label id = "cash" ></label><br>
 Spam/second x Gullibility = Cash/second<br>
 Cash/second = $<label id = "cps"></label>/second<br>
 Spam/second = <label id = "sps"></label> emails/second<br>
 Gullibility = <label id = "g"></label>%<br>
 <div id = "unitDiv"></div>
-</body>
 </div>
+
 <div class = "column-center">
 Upgrades:<br>
 Cost: $<label id = "upgradecost">?</label><br>
@@ -67,10 +67,13 @@ Cost: $<label id = "upgradecost">?</label><br>
 	</tr>
 </table>
 </div>
-</div>
+
 <div class = "column-right">
-[Right Column]
+	[Right Column]
 </div>
+</div>
+
+</body>
 <script>
 var cash = 0;
 var cps = 0, sps = 0, g = 0.5; //cash/sec, spam/sec, gullibility
@@ -163,12 +166,12 @@ var calcSPS = function()
 }
 var hover = function(buttonNumber, on)
 {
-	if(on)
+	if(on && buttonNumber < upgrade.name.length)
 	{
 		document.getElementById('upgradecost').innerHTML = upgrade.cost[buttonNumber];
 		document.getElementById('description').innerHTML = upgrade.description[buttonNumber];
 	}
-	if(!on)
+	else
 	{
 		document.getElementById('upgradecost').innerHTML = "?"
 		document.getElementById('description').innerHTML = "Hover over an available upgrade to read the description!";
